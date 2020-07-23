@@ -1,0 +1,18 @@
+
+
+.card-image {
+	opacity: 0.7;
+	height: 8rem;
+}
+
+h1 {
+	color: #296EB4 ;
+  	font-family: "Allerta Stencil", Sans-serif;
+
+}
+.hoverable:hover .card-image {
+	opacity: 1;
+}
+.btn-group, .btn-group-vertical {
+	position: absolute !important;
+}

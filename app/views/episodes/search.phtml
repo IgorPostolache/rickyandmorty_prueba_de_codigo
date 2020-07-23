@@ -1,0 +1,68 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="previous"><?php echo $this->tag->linkTo(["episodes/index", "Atrás"]); ?></li>
+            <li class="next"><?php echo $this->tag->linkTo(["episodes/new", "Crear "]); ?></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="page-header">
+    <h1>Resultados de búsqueda</h1>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha de emisión</th>
+                <th>Episodo</th>
+                <th>Nombre</th>
+                <th>Nº de personajes</th>
+                <th>Url</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($page->getItems() as $episode): ?>
+            <tr>
+                <td><?php echo $episode['id'] ?></td>
+                <td><?php echo $episode['air_date'] ?></td>
+                <td><?php echo $episode['episode'] ?></td>
+                <td><?php echo $episode['name'] ?></td>
+                <td><?php echo $episode['characters'] ?></td>
+                <td><?php echo $episode['url'] ?></td>
+
+                <td><?php echo $this->tag->linkTo(["episodes/edit/" . $episode['id'], "Editar"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["episodes/delete/" . $episode['id'], "Borrar"]); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-sm-1">
+        <p class="pagination" style="line-height: 1.42857;padding: 6px 12px;">
+            <?php echo $page->getCurrent(), "/", $page->getTotalItems() ?>
+        </p>
+    </div>
+    <div class="col-sm-11">
+        <nav>
+            <ul class="pagination">
+                <li><?php echo $this->tag->linkTo(["episodes/search", "Primero", 'class' => 'page-link', 'id' => 'first']) ?></li>
+                <li><?php echo $this->tag->linkTo(["episodes/search?page=" . $page->getPrevious(), "Anterior", 'class' => 'page-link', 'id' => 'previous']) ?></li>
+                <li><?php echo $this->tag->linkTo(["episodes/search?page=" . $page->getNext(), "Siguiente", 'class' => 'page-link', 'id' => 'next']) ?></li>
+                <li><?php echo $this->tag->linkTo(["episodes/search?page=" . $page->getLast(), "Último", 'class' => 'page-link', 'id' => 'last']) ?></li>
+            </ul>
+        </nav>
+    </div>
+</div>
